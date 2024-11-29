@@ -14,10 +14,10 @@ module ItemManager
     items.slice(0, quantity)
   end
 
-  def items_list # 自身の所有するItemインスタンスの在庫状況を、["番号", "商品名", "金額", "数量"]という列でテーブル形式にして出力します。
+  def items_list 
     kosi = Kosi::Table.new({header: %w{商品番号 商品名 金額 数量}}) # Gemgileに"kosi"のURLを記載
-    print kosi.render(
-      stock.map do |stock|
+    print kosi.render(         # 自身の所有するItemインスタンスの在庫状況を、
+      stock.map do |stock|     #["番号", "商品名", "金額", "数量"]という列でテーブル形式にして出力します。
         [
           stock[:label][:number],
           stock[:label][:name],

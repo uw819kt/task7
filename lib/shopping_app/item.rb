@@ -1,4 +1,7 @@
+require_relative "ownable"
+
 class Item
+  include Ownable #(attr_accessor :owner)
   attr_reader :number, :name, :price
 
   @@instances = []
@@ -10,7 +13,7 @@ class Item
     self.owner = owner
 
     # Itemインスタンスの生成時、そのItemインスタンス(self)は、@@insntancesというクラス変数に格納されます。
-    @@instances << self
+    @@instances << self #以下クラスメソッド
   end
 
   def label

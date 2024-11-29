@@ -18,13 +18,13 @@ puts "🤖 あなたの名前を教えてください"
 customer = Customer.new(gets.chomp)
 
 puts "🏧 ウォレットにチャージする金額を入力にしてください"
-customer.wallet.deposit(gets.chomp.to_i)
+customer.wallet.deposit(gets.chomp.to_i)#残高
 
 puts "🛍️ ショッピングを開始します"
 end_shopping = false
 while !end_shopping do
   puts "📜 商品リスト"
-  seller.items_list
+  seller.items_list #DICstoreの在庫
 
   puts "️️⛏ 商品番号を入力してください"
   number = gets.to_i
@@ -32,13 +32,13 @@ while !end_shopping do
   puts "⛏ 商品数量を入力してください"
   quantity = gets.to_i
 
-  items = seller.pick_items(number, quantity)
+  items = seller.pick_items(number, quantity)#在庫から取り出した商品
 
-  items&.each{|item| customer.cart.add(item) }
+  items&.each{|item| customer.cart.add(item) }#itemの中にitemsを入れていく
 
   puts "🛒 カートの中身"
-  customer.cart.items_list
-  puts "🤑 合計金額: #{customer.cart.total_amount}"
+  customer.cart.items_list #購入リスト(配列形式)
+  puts "🤑 合計金額: #{customer.cart.total_amount}"#購入リストのprice計算
 
   puts "😭 買い物を終了しますか？(yes/no)"
   end_shopping = gets.chomp == "yes"
@@ -48,16 +48,15 @@ puts "💸 購入を確定しますか？(yes/no)"
 customer.cart.check_out if gets.chomp == "yes"
 
 puts "୨୧┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈結果┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈୨୧"
-puts "️🛍️ ️#{customer.name}の所有物"
-customer.items_list
+puts "️🛍️ ️#{customer.name}の所有物"#入力者
+customer.items_list #購入リスト 
 puts "😱👛 #{customer.name}のウォレット残高: #{customer.wallet.balance}"
 
-puts "📦 #{seller.name}の在庫状況"
+puts "📦 #{seller.name}の在庫状況" #DICstore
 seller.items_list
 puts "😻👛 #{seller.name}のウォレット残高: #{seller.wallet.balance}"
-
 puts "🛒 カートの中身"
-customer.cart.items_list
+customer.cart.items_list #入力者の購入品
 puts "🌚 合計金額: #{customer.cart.total_amount}"
 
 puts "🎉 終了"
